@@ -1,0 +1,585 @@
+/* ===========================
+   Reel Section — Vertical Scroll
+   =========================== */
+
+.reel-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Blurred background with fixed image behind */
+.reel-blur-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 50, 0.85) 0%,
+    rgba(50, 40, 60, 0.85) 100%
+  );
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  z-index: 0;
+}
+
+/* Content container */
+.reel-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 0 40px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Emoji in reel */
+.reel-emoji {
+  font-size: clamp(64px, 15vw, 120px);
+  line-height: 1;
+  animation: floatEmoji 3s ease-in-out infinite;
+}
+
+@keyframes floatEmoji {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Content text */
+.reel-text {
+  font-family: "Sansation", sans-serif;
+  font-size: clamp(32px, 8vw, 56px);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 2px;
+  margin: 0;
+  text-align: center;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .reel-content {
+    padding: 0 80px;
+  }
+}
+
+/* Memories Button */
+.memories-button {
+  padding: 20px 60px;
+  font-family: "Sansation", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: buttonPulse 2s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes buttonPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.memories-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.6s,
+    height 0.6s;
+}
+
+.memories-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.memories-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.25);
+  animation: none;
+}
+
+.memories-button:active {
+  transform: scale(0.95);
+}
+
+/* Inline Birthday Content */
+.birthday-content-inline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  animation: birthdayFadeIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+}
+
+@keyframes birthdayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Happy Words Container */
+.happy-words {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+/* Individual Happy Words */
+.happy-word {
+  position: absolute;
+  font-family: "Sansation", sans-serif;
+  font-size: clamp(16px, 3.5vw, 24px);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  animation: happyFloat 3s ease-in-out infinite;
+  text-shadow: 0 2px 15px rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+}
+
+@keyframes happyFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+/* Random positions for each Happy word */
+.happy-1 {
+  top: 15%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.happy-2 {
+  top: 20%;
+  right: 8%;
+  animation-delay: 0.3s;
+}
+
+.happy-3 {
+  top: 40%;
+  left: 5%;
+  animation-delay: 0.6s;
+}
+
+.happy-4 {
+  top: 45%;
+  right: 10%;
+  animation-delay: 0.9s;
+}
+
+.happy-5 {
+  bottom: 30%;
+  left: 8%;
+  animation-delay: 1.2s;
+}
+
+.happy-6 {
+  bottom: 25%;
+  right: 12%;
+  animation-delay: 1.5s;
+}
+
+.happy-7 {
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 0.2s;
+}
+
+.happy-8 {
+  bottom: 18%;
+  left: 15%;
+  animation-delay: 1.8s;
+}
+
+.happy-9 {
+  bottom: 22%;
+  right: 20%;
+  animation-delay: 2.1s;
+}
+
+.happy-10 {
+  top: 55%;
+  left: 3%;
+  animation-delay: 2.4s;
+}
+
+/* Main Birthday Text */
+.birthday-main {
+  font-family: "Sansation", sans-serif;
+  font-size: clamp(48px, 15vw, 96px);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  margin: 0;
+  animation: birthdayPulse 2s ease-in-out infinite;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+  z-index: 2;
+  position: relative;
+}
+
+@keyframes birthdayPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 0 0 60px rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* Birthday Emoji Inline */
+.birthday-emoji-inline {
+  font-size: clamp(56px, 14vw, 80px);
+  animation: emojiPulseInline 1.5s ease-in-out infinite;
+  z-index: 2;
+  position: relative;
+}
+
+@keyframes emojiPulseInline {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Birthday Name */
+.birthday-name {
+  font-family: "Sansation", sans-serif;
+  font-size: clamp(27px, 8vw, 51px);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  margin: 0;
+  animation: nameFadeIn 1s ease-out 0.5s forwards;
+  opacity: 0;
+  z-index: 2;
+  position: relative;
+  text-shadow: 0 2px 20px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes nameFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll Reminder for Reel Sections */
+.reel-scroll-reminder {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: reelScrollReminderFadeIn 1s ease-out 2.5s forwards;
+}
+
+@keyframes reelScrollReminderFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.reel-scroll-text {
+  font-family: var(--font-quicksand), "Quicksand", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 3px;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reel-scroll-arrow {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.reel-scroll-arrow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    #ffffff 50%,
+    transparent 100%
+  );
+  animation: reelScrollArrowAnim 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+@keyframes reelScrollArrowAnim {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .memories-button {
+    padding: 16px 48px;
+    font-size: 18px;
+  }
+}
+
+/* ===========================
+   Wishes Section - Adventures
+   =========================== */
+
+.wishes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 600px;
+  padding: 0 20px;
+  margin-top: -80px;
+}
+
+.wish-line {
+  font-family: "Sansation", sans-serif;
+  font-size: clamp(18px, 4vw, 24px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Staggered animation for each line - only when visible */
+.wishes-visible .wish-line-1 {
+  animation: wishFadeIn 0.8s ease-out 0.5s forwards;
+}
+
+.wishes-visible .wish-line-2 {
+  animation: wishFadeIn 0.8s ease-out 1.2s forwards;
+}
+
+.wishes-visible .wish-line-3 {
+  animation: wishFadeIn 0.8s ease-out 1.9s forwards;
+}
+
+.wishes-visible .wish-line-4 {
+  animation: wishFadeIn 0.8s ease-out 2.6s forwards;
+}
+
+.wishes-visible .wish-line-5 {
+  animation: wishFadeIn 0.8s ease-out 3.3s forwards;
+}
+
+.wishes-visible .wish-line-6 {
+  animation: wishFadeIn 0.8s ease-out 4s forwards;
+}
+
+@keyframes wishFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .wishes-container {
+    gap: 20px;
+    padding: 0 16px;
+  }
+
+  .wish-line {
+    font-size: clamp(16px, 4vw, 20px);
+  }
+}
+
+/* ===========================
+   Moments Section
+   =========================== */
+
+.moments-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 600px;
+  padding: 0 20px;
+  margin-top: -120px;
+}
+
+.moment-line {
+  font-family: "Sansation", sans-serif;
+  font-size: clamp(20px, 5vw, 28px);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Staggered animation for moments */
+.moments-visible .moment-line-1 {
+  animation: momentFadeIn 0.8s ease-out 0.5s forwards;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.moments-visible .moment-line-2 {
+  animation: momentFadeIn 0.8s ease-out 1.3s forwards;
+  font-size: clamp(24px, 6vw, 36px);
+  font-weight: 600;
+}
+
+.moments-visible .moment-line-3 {
+  animation: momentFadeIn 0.8s ease-out 2.1s forwards;
+  font-size: clamp(18px, 4.5vw, 24px);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes momentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .moments-container {
+    gap: 24px;
+    padding: 0 16px;
+  }
+}
+
+/* ===========================
+   Bye Section - Dreams
+   =========================== */
+
+.bye-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -100px;
+}
+
+.bye-text {
+  font-family: "Sansation", sans-serif;
+  font-size: clamp(32px, 8vw, 48px);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: byeFadeIn 1s ease-out forwards;
+}
+
+@keyframes byeFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

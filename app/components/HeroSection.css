@@ -1,0 +1,210 @@
+/* ===========================
+   Hero Section — Mobile-First
+   =========================== */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Skeleton loader for SSR */
+.hero-skeleton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  animation: skeletonPulse 2s ease-in-out infinite;
+}
+
+@keyframes skeletonPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Image container */
+.hero-image-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-image {
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition:
+    opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-image--loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Overlay gradient on top of image */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Main content area */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 24px;
+  text-align: center;
+}
+
+/* "Heyyyy👋" — big heading */
+.hero-hey {
+  font-family: "Sansation", sans-serif;
+  font-size: clamp(42px, 12vw, 64px);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 1px;
+  line-height: 1.15;
+  margin: 0 0 20px;
+  text-shadow: 0 3px 40px rgba(0, 0, 0, 0.12);
+
+  /* Fade in */
+  opacity: 0;
+  animation: heyFadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+}
+
+@keyframes heyFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* "It's the day 🎂" — smaller subtitle */
+.hero-day {
+  font-family: var(--font-quicksand), "Quicksand", sans-serif;
+  font-size: clamp(15px, 4.2vw, 19px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 2.5px;
+  margin: 0;
+  text-shadow: 0 1px 20px rgba(0, 0, 0, 0.08);
+
+  /* Delayed fade in with gentle float */
+  opacity: 0;
+  animation: dayFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
+}
+
+@keyframes dayFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(2px);
+  }
+
+  60% {
+    filter: blur(0px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+/* Scroll Reminder — Bottom of section */
+.hero-scroll-reminder {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: scrollReminderFadeIn 1s ease-out 2.5s forwards;
+}
+
+@keyframes scrollReminderFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.hero-scroll-text {
+  font-family: var(--font-quicksand), "Quicksand", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 3px;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hero-scroll-arrow {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-scroll-arrow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    #ffffff 50%,
+    transparent 100%
+  );
+  animation: scrollArrowAnim 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+@keyframes scrollArrowAnim {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
