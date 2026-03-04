@@ -162,10 +162,12 @@ export default function ReelSection() {
           </div>
 
           {/* Scroll Reminder */}
-          <div className="reel-scroll-reminder">
-            <span className="reel-scroll-text">Scroll</span>
-            <div className="reel-scroll-arrow" />
-          </div>
+          {item.content !== "Dreams" && (
+            <div className="reel-scroll-reminder">
+              <span className="reel-scroll-text">Scroll</span>
+              <div className="reel-scroll-arrow" />
+            </div>
+          )}
         </section>
       ))}
     </>

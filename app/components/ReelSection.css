@@ -189,15 +189,19 @@
   animation: happyFloat 3s ease-in-out infinite;
   text-shadow: 0 2px 15px rgba(255, 255, 255, 0.3);
   white-space: nowrap;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  transform: translateZ(0);
 }
 
 @keyframes happyFloat {
   0%,
   100% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(0) translateZ(0);
   }
   50% {
-    transform: translateY(-10px) rotate(2deg);
+    transform: translateY(-10px) translateZ(0);
   }
 }
 
